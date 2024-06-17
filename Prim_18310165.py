@@ -2,6 +2,10 @@
 ID: 18310165
 Fecha: 2023-03-16"""
 
+
+import networkx as nx
+import matplotlib.pyplot as plt
+
 G = {
     '1': {'2': 4, '3': 2, '5': 3},
     '2': {'1': 4, '4': 5},
@@ -44,4 +48,39 @@ def w(g, m, j):
         return float('inf')  # Retornamos infinito si no existe la arista
 
 
-print(prim(G, '1'))
+print(prim(G, '1))
+
+# Definir el grafo original usando networkx
+G_nx = nx.Graph()
+for nodo in G:
+    for vecino, peso in G[nodo].items():
+        G_nx.add_edge(nodo, vecino, weight=peso)
+
+# Ejecutar el algoritmo de Prim y obtener el MST
+mst_edges = prim(G, '1')
+
+# Definir el MST usando networkx
+MST_nx = nx.Graph()
+for edge in mst_edges:
+    MST_nx.add_edge(edge[0], edge[1], weight=G[edge[0]][edge[1]])
+
+# Dibujar el grafo original y el MST
+plt.figure(figsize=(14, 7))
+
+# Subplot para el grafo original
+plt.subplot(121)
+pos = nx.spring_layout(G_nx)
+nx.draw(G_nx, pos, with_labels=True, node_color='lightblue', node_size=700, font_size=14)
+labels = nx.get_edge_attributes(G_nx, 'weight')
+nx.draw_networkx_edge_labels(G_nx, pos, edge_labels=labels)
+plt.title("Grafo Original")
+
+# Subplot para el MST
+plt.subplot(122)
+pos = nx.spring_layout(MST_nx)
+nx.draw(MST_nx, pos, with_labels=True, node_color='lightgreen', node_size=700, font_size=14)
+labels = nx.get_edge_attributes(MST_nx, 'weight')
+nx.draw_networkx_edge_labels(MST_nx, pos, edge_labels=labels)
+plt.title("Árbol de Expansión Mínima (MST)")
+
+plt.show()
