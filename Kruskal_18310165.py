@@ -1,4 +1,9 @@
-#Mario Alberto Gomez Temores      21310159    15\06\24
+"""
+Autor: Antonio López Haro
+ID: 18310165
+Fecha: 2022-03-26
+"""
+
 class DisjointSet:
     def __init__(self, vertices):
         # Inicializa los padres y rangos para cada vertice
